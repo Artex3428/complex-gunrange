@@ -186,12 +186,17 @@ end
 
 function insideZone(self)
     if IsControlJustPressed(0, 38) and inFirearmsZone then
-        if exports['qb-policejob']:IsHandcuffed() then
-            QBCore.Functions.Notify("You can't do this while handcuffed.", "error")
+        if exports.qbx_police:IsHandcuffed() then
+            lib.notify({
+                title = 'Range System',
+                description = "You can't do this while handcuffed.",
+                type = 'error'
+            })
+
             return
         end
         openTestMenu()
-    end    
+    end
 end
 
 local firearmsZone = lib.zones.box({

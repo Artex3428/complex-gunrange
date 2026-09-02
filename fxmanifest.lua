@@ -17,4 +17,11 @@ shared_scripts {
     'shared/*.lua'
 }
 
+dependencies {
+    'qbx_core',
+    'ox_lib',
+    'ox_inventory',
+    'qbx_police'
+}
+
 lua54 'yes'

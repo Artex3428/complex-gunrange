@@ -1,5 +1,3 @@
-local QBCore = exports['qb-core']:GetCoreObject()  -- Imports the QBCore Stuff
-
 -- Sets Range In Use
 RegisterNetEvent('complex-gunrange:server:setInUse', function()
     TriggerClientEvent('complex-gunrange:setInUse', -1)
@@ -8,7 +6,8 @@ end)
 -- Event to Give Results Receipt
 RegisterNetEvent('complex-gunrange:giveResultReceipt', function(score)
     local src = source
-    local Player = QBCore.Functions.GetPlayer(src)
+    local Player = exports.qbx_core:GetPlayer(src)
+    if not Player then return end
     local date = os.date('%Y-%m-%d %H:%M')
     local fullname = ''..Player.PlayerData.charinfo.firstname..' '..Player.PlayerData.charinfo.lastname..''
     local info = {
@@ -16,7 +15,14 @@ RegisterNetEvent('complex-gunrange:giveResultReceipt', function(score)
         score = score,
         date = date,
     }
-    if not Player.Functions.AddItem('gunrangereceipt', 1, false, info) then
+    local success = exports.ox_inventory:AddItem(
+    src,
+    'gunrangereceipt',
+    1,
+    info
+    )
+
+    if not success then
         TriggerClientEvent('ox_lib:notify', src, {
             id = 'range_item_sent',
             title = 'Range System',
@@ -31,7 +37,6 @@ RegisterNetEvent('complex-gunrange:giveResultReceipt', function(score)
         })
         return
     end
-    TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items['gunrangereceipt'], 'add')
     TriggerClientEvent('ox_lib:notify', src, {
         id = 'range_item_sent',
         title = 'Range System',
