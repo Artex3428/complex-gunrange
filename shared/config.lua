@@ -10,11 +10,11 @@ end
 
 -- Main Blip Settings // WIP
 Config.Blip = {
-    enabled = false, -- true / false
+    enabled = true, -- true / false
     location = vector3(821.46, -2163.57, 29.66), -- Coords for the Blip
     sprite = 147, -- Sprite Settings
     scale = 0.5, -- Scale of the Blip
-    label = 'Ammunation Test' -- Blip Label
+    label = 'Ammunation Gunrange' -- Blip Label
 }
 
 -- Main Zone Settings
